@@ -6,7 +6,7 @@ exports.login = async (req, res) => {
         return res.redirect('/home'); //redirect to home
     } else
         req.session.loggedin = false;
-    return res.render('Auth/login', { data: { email: "" } });
+    return res.render('Backend/Admin/Auth/login', { data: { email: "" } });
 }
 
 exports.loginSubmit = async (req, res) => {
@@ -24,7 +24,7 @@ exports.loginSubmit = async (req, res) => {
                     req.session.loggedin = true;
                     const { password, ...user } = await results[0];
                     req.session.user = user;
-                    return res.redirect('/home');
+                    return res.redirect('/admin');
                 } else {
                     return res.render('Auth/login', { error: 'Incorrect Email', data });
                 }
@@ -43,7 +43,7 @@ exports.register = async (req, res) => {
         } else {
             req.session.lockScreen = false;
             req.session.loggedin = false;
-            return res.render('Auth/register', { data: { email: "", username: "" } });
+            return res.render('Backend/Admin/Auth/signup', { data: { email: "", username: "" } });
         }
 }
 
@@ -56,7 +56,8 @@ exports.registerSubmit = async (req, res) => {
         con.query("INSERT INTO user(username, email, password) values ( ?, ?, ?)",
             [data.username, data.email, hashedPassword], async (error, list) => {
                 if (error) {
-                    return res.render('Auth/register', { error: error, data });
+                    console.log(error);
+                    return res.render('Backend/Admin/Auth/signup', { error: error, data });
                 } else {
                     con.query('SELECT * FROM user WHERE email = ? ', [data.email],
                         async function (error, results, fields) {
@@ -65,7 +66,7 @@ exports.registerSubmit = async (req, res) => {
                                 req.session.loggedin = true;
                                 const { password, ...user } = await results[0];
                                 req.session.user = user;
-                                return res.redirect('/home');
+                                return res.redirect('/admin');
                             } else {
                                 return res.render('Auth/register', { error: 'Incorrect Email', data });
                             }

@@ -31,7 +31,11 @@ app.use(bodyParser.json());
 
 //Routes
 const home = require('./src/routes/home.route');
+const auth = require('./src/routes/auth.route');
+const admin = require('./src/routes/admin.route');
 app.use(home);
+app.use(auth);
+app.use(admin);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
