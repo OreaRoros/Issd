@@ -1,0 +1,69 @@
+<%- include('../../_partials/_header.ejs') %>
+<%- include('../../_partials/_sidebar.ejs') %>
+<%- include('../../_partials/_navbar.ejs') %>
+<div class="page-content-wrapper border">
+
+  <!-- Title -->
+  <div class="row mb-3">
+    <div class="col-12 d-sm-flex justify-content-between align-items-center">
+      <h1 class="h3 mb-2 mb-sm-0">Actualités</h1>
+    </div>
+    <div class="line"></div>
+  </div>
+
+  <form action="/admin-edit-actualite/<%= actualites.id %>" method="post" enctype="multipart/form-data">
+    <div class="col-12 mb-4">
+      <label class="form-label">Titre de l'actualité</label>
+      <input class="form-control" type="text" name="titre" placeholder="Titre de l'actualité" value="<%= actualites.titre %>">
+    </div>
+    <div class="col-12 mb-4">
+      <label class="form-label">Date d'éxpiration</label>
+      <input class="form-control" type="date" name="expiration" placeholder="Date d'éxpiration" id="date">
+      <input type="hidden" value="<%= actualites.expiration.toDate() %>" id="datevalue">
+    </div>
+    <div class="col-12 mb-4">
+      <label class="form-label">Image</label>
+      <input class="form-control" name="image" type="file" value="<%= actualites.image %>">
+    </div>
+    <div class=" col-12 mb-4">
+      <label class="form-label">Déscription</label>
+      <textarea class="form-control" name="description" id="description"><%= actualites.description %></textarea>
+    </div>
+    <div class="d-flex justify-content-end mt-3">
+      <button type="submit" class="btn btn-primary next-btn mb-0">Enregistrer</button>
+    </div>
+  </form>
+</div>
+
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    selector: '#description',
+    plugins: [
+      'a11ychecker', 'advlist', 'advcode', 'advtable', 'autolink', 'checklist', 'export',
+      'lists', 'link', 'image', 'charmap', 'preview', 'anchor', 'searchreplace', 'visualblocks',
+      'powerpaste', 'fullscreen', 'formatpainter', 'insertdatetime', 'media', 'table', 'help', 'wordcount'
+    ],
+    toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+      'alignleft aligncenter alignright alignjustify | ' +
+      'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+  });
+</script>
+
+<script>
+  const getTwoDigits = (value) => value < 10 ? `0${value}` : value;
+
+  const formatDate = (date) => {
+    const day = getTwoDigits(date.getDate());
+    const month = getTwoDigits(date.getMonth() + 1); // add 1 since getMonth returns 0-11 for the months
+    const year = date.getFullYear();
+
+    return `${year}-${month}-${day}`;
+  }
+
+  const dates = document.getElementById('datevalue').value;
+  const date = new Date(dates);
+  console.log(date);
+  document.getElementById('date').value = formatDate(date);
+</script>
+<%- include('../../_partials/_footer.ejs') %>

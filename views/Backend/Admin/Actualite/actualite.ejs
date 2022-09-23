@@ -1,0 +1,178 @@
+<%- include('../../_partials/_header.ejs') %>
+<%- include('../../_partials/_sidebar.ejs') %>
+<%- include('../../_partials/_navbar.ejs') %>
+<!-- Page main content START -->
+<div class="page-content-wrapper border">
+
+  <!-- Title -->
+  <div class="row mb-3">
+    <div class="col-12 d-sm-flex justify-content-between align-items-center">
+      <h1 class="h3 mb-2 mb-sm-0">Actualités</h1>
+      <a href="/admin-add-actualite" class="btn btn-sm btn-primary mb-0">Nouveau</a>
+    </div>
+  </div>
+
+  <!-- Card START -->
+  <div class="card bg-transparent border">
+
+    <!-- Card header START -->
+    <div class="card-header bg-light border-bottom">
+      <!-- Search and select START -->
+      <div class="row g-3 align-items-center justify-content-between">
+        <% if (locals.flash && locals.flash.error) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= flash.error %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+        <% if (locals.flash && locals.flash.success) { %>
+        <div class="alert alert-success alert-dismissible fade show">
+          <%= flash.success %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+        <!-- Search bar -->
+        <div class="col-md-8" style="margin-left: 150px;">
+          <form class="rounded position-relative">
+            <input class="form-control bg-body search" oninput="search()" type="search" placeholder="Rechercher" aria-label="Search">
+            <button class="btn bg-transparent px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit"><i class="fas fa-search fs-6 "></i></button>
+          </form>
+        </div>
+      </div>
+      <!-- Card header END -->
+
+      <!-- Card body START -->
+      <div class="card-body">
+        <!-- Course table START -->
+        <div class="table-responsive border-0 rounded-3">
+          <!-- Table START -->
+          <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+            <!-- Table head -->
+            <thead>
+              <tr>
+                <th scope="col" class="border-0 rounded-start">Titre</th>
+                <th scope="col" class="border-0">Date d'éxpiration</th>
+                <th scope="col" class="border-0 rounded-end">Action</th>
+              </tr>
+            </thead>
+
+            <!-- Table body START -->
+            <tbody class="tbody">
+              <% for( let actualite of result) { %>
+              <tr>
+                <!-- Table data -->
+                <td>
+                  <div class="d-flex align-items-center position-relative">
+                    <!-- Image -->
+                    <div class="w-60px">
+                      <img src="/assets/upload/<%= actualite.image %>" class="rounded" alt="">
+                    </div>
+                    <!-- Title -->
+                    <h6 class="table-responsive-title mb-0 ms-2">
+                      <a href="/admin-edit-actualite/<%= actualite.id %>" class="stretched-link"><%= actualite.titre %></a>
+                    </h6>
+                  </div>
+                </td>
+
+                <!-- Table data -->
+                <td>
+                  <span class="badge <%= (actualite.expiration > new Date()) ? "bg-success bg-opacity-15" : "bg-warning bg-opacity-15" %>  <%= (actualite.expiration > new Date()) ? "text-success" : "text-warning" %>"><%= (actualite.expiration > new Date()) ? moment(actualite.expiration).fromNow() : "Déjà éxpiré" %></span>
+                </td>
+
+
+                <!-- Table data -->
+                <td>
+                  <a href="/admin-edit-actualite/<%= actualite.id %>" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0">Editer</a>
+                  <form action="/admin-delete-actu/<%= actualite.id %>" method="post" style="display: inline;">
+                    <button class="btn btn-sm btn-danger-soft mb-0">Supprimer</button>
+                  </form>
+                </td>
+              </tr>
+              <% } %>
+              <!-- Table row -->
+
+
+            </tbody>
+            <!-- Table body END -->
+          </table>
+          <!-- Table END -->
+        </div>
+        <!-- Course table END -->
+      </div>
+      <!-- Card body END -->
+
+      <!-- Card footer START -->
+      <% if (result) { %>
+      <div class="card-footer bg-transparent pt-0">
+        <!-- Pagination START -->
+        <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+          <!-- Content -->
+          <p class="mb-0 text-center text-sm-start"> Affichage de <%= page %> sur <%= endingLink %> of <%= numOfResults %> entrées</p>
+          <!-- Pagination -->
+          <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+            <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+              <!-- <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li> -->
+              <% if(page > 1) { %>
+              <li class="page-item mb-0"><a class="page-link" href="/admin-actualite/?page=<%=page-1%>"><i class="fas fa-angle-left"></i></a></li>
+              <% } %>
+              <% var i = (Number(page) > 5 ? Number(page) - 4 : 1) %>
+              <% if (i !== 1) { %>
+              <li class="page-item mb-0 disabled"><a>...</a></li>
+              <% } %>
+              <% for( let i = 1; i <= endingLink; i++ ) { %>
+              <% if (i === page) { %>
+              <li class="page-item mb-0 active"><a class="page-link" href="/admin-actualite/?page=<%=i%>"><%=i%></a></li>
+              <% continue; %>
+              <% } %>
+              <li class="page-item mb-0"><a class="page-link" href="/admin-actualite/?page=<%=i%>"><%=i%></a></li>
+              <% } %>
+              <% if(page < numberOfPages) { %>
+              <li class="page-item mb-0"><a class="page-link" href="/admin-actualite/?page=<%=page+1%>"><i class="fas fa-angle-right"></i></a></li>
+              <% } %>
+              <!-- <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
+                <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
+                <li class="page-item mb-0"><a class="page-link" href="#">3</a></li> 
+                <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>-->
+            </ul>
+          </nav>
+        </div>
+        <!-- Pagination END -->
+      </div>
+      <% } %>
+
+      <!-- Card footer END -->
+    </div>
+    <!-- Card END -->
+  </div>
+  <!-- Page main content END -->
+</div>
+
+<%- include('../../_partials/_footer.ejs') %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment-locale-fr@1.0.0/fr.min.js"></script>
+<script>
+  function search() {
+    $('.search').bind('input', function() {
+      var resultat = $(this).val();
+      $.ajax({
+        url: '/admin-search-actu',
+        method: 'POST',
+        data: {
+          titre: resultat,
+        },
+        success: function(res) {
+          var HTML = '';
+          for (actualite of res) {
+            var text = '<tr><td><div class="d-flex align-items-center position-relative"><div class="w-60px"><img src="/assets/upload/' + actualite.image + '" class="rounded" alt=""></div><h6 class="table-responsive-title mb-0 ms-2"> <a href="/admin-edit-actualite/" class="stretched-link">' + actualite.titre + '</a></h6></div></td><td><span class="badge bg-success bg-opacity-15 text-success">' + moment(actualite.expiration).fromNow() + '</span></td><td><a href="/admin-edit-actualite/' + actualite.id + '" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0">Editer</a><form action="/admin-delete-actu/' + actualite.id + '" method="post" style="display: inline;"><button class="btn btn-sm btn-danger-soft mb-0">Supprimer</button></form></td></tr>';
+            HTML += text;
+          }
+          $('.tbody').html(HTML);
+        },
+        error: function(error) {
+          console.log(error)
+        }
+      })
+    });
+
+  }
+</script>

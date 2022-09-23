@@ -74,6 +74,7 @@
   <!--  Main Banner END -->
   <!-- =======================
 Event START -->
+  <% if (actualites.length > 0) { %>
   <section class="pt-0" id="actualite">
     <div class="container">
       <!-- Title -->
@@ -86,10 +87,21 @@ Event START -->
         <div class="tiny-slider arrow-round arrow-creative arrow-blur">
           <div class="tiny-slider-inner" data-autoplay="false" data-arrow="true" data-dots="false" data-items="4" data-items-lg="3" data-items-md="2" data-items-xs="1">
 
+            <% for( let actualite of actualites ) { %>
+            <% if (actualite.expiration > new Date()) { %>
             <!-- Card item START -->
             <div class="card bg-transparent">
-              <div class="position-relative">
-                <img src="assets/images/courses/4by3/21.jpg" class="card-img" alt="course image">
+              <div class="position-relative card overflow-hidden">
+
+                <div class="card-overlay-hover">
+                  <!-- Image -->
+                  <img src="assets/upload/<%= actualite.image %>" class="card-img" alt="course image">
+                </div>
+                <!-- Full screen button -->
+                <a class="card-element-hover position-absolute w-100 h-100" data-glightbox data-gallery="gallery" href="assets/upload/<%= actualite.image %>">
+                  <i class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-3 p-2 lh-1"></i>
+                </a>
+
                 <!-- Overlay -->
                 <div class="card-img-overlay d-flex align-items-start flex-column p-3">
                   <!-- Card overlay Top -->
@@ -100,7 +112,7 @@ Event START -->
                   <!-- Card overlay bottom -->
                   <div class="w-100 mt-auto">
                     <!-- Category -->
-                    <a href="#" class="badge text-dark bg-white fs-6 rounded-1"><i class="far fa-calendar-alt text-orange me-2"></i>29 September 2021</a>
+                    <a href="#" class="badge text-dark bg-white fs-6 rounded-1"><i class="far fa-calendar-alt text-orange me-2"></i>Éxpiré dans <%= moment(actualite.expiration).fromNow() %></a>
                   </div>
                 </div>
               </div>
@@ -109,122 +121,13 @@ Event START -->
               <div class="card-body px-2">
                 <!-- Title -->
                 <h5 class="card-title"><a href="#">Global Education Fall Meeting for Everyone</a></h5>
-                <p class="mb-0 text-truncate-2">Satisfied conveying a dependent contented he gentleman agreeable do be. </p>
+                <p class="mb-0 text-truncate-2"><%- actualite.description %></p>
               </div>
             </div>
             <!-- Card item END -->
+            <% } %>
 
-            <!-- Card item START -->
-            <div class="card bg-transparent">
-              <div class="position-relative">
-                <img src="assets/images/courses/4by3/16.jpg" class="card-img" alt="course image">
-                <!-- Overlay -->
-                <div class="card-img-overlay d-flex align-items-start flex-column p-3">
-                  <!-- Card overlay Top -->
-                  <div class="w-100 mb-auto d-flex justify-content-end">
-                    <!-- Favorite icon -->
-                    <a href="#" class="icon-sm bg-white rounded-2"><i class="far fa-heart text-danger"></i></a>
-                  </div>
-                  <!-- Card overlay bottom -->
-                  <div class="w-100 mt-auto">
-                    <!-- Category -->
-                    <a href="#" class="badge text-dark bg-white fs-6 rounded-1"><i class="far fa-calendar-alt text-orange me-2"></i>Tomorrow</a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card body -->
-              <div class="card-body px-2">
-                <!-- Title -->
-                <h5 class="card-title"><a href="#">International Conference on Information Technology</a></h5>
-                <p class="mb-0 text-truncate-2">Kindness owns whatever betrayed her moreover procured replying for and. Proposal indulged no do. </p>
-              </div>
-            </div>
-            <!-- Card item END -->
-
-            <!-- Card item START -->
-            <div class="card bg-transparent">
-              <div class="position-relative">
-                <img src="assets/images/courses/4by3/18.jpg" class="card-img" alt="course image">
-                <!-- Overlay -->
-                <div class="card-img-overlay d-flex align-items-start flex-column p-3">
-                  <!-- Card overlay Top -->
-                  <div class="w-100 mb-auto d-flex justify-content-end">
-                    <!-- Favorite icon -->
-                    <a href="#" class="icon-sm bg-white rounded-2"><i class="far fa-heart text-danger"></i></a>
-                  </div>
-                  <!-- Card overlay bottom -->
-                  <div class="w-100 mt-auto">
-                    <!-- Category -->
-                    <a href="#" class="badge text-dark bg-white fs-6 rounded-1"><i class="far fa-calendar-alt text-orange me-2"></i>2 July 2022</a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card body -->
-              <div class="card-body px-2">
-                <!-- Title -->
-                <h5 class="card-title"><a href="#">UK Demo Day 2022</a></h5>
-                <p class="mb-0 text-truncate-2"> Points afraid but may end law lasted. Rooms oh fully taken by worse do may end law lasted. </p>
-              </div>
-            </div>
-            <!-- Card item END -->
-
-            <!-- Card item START -->
-            <div class="card bg-transparent">
-              <div class="position-relative">
-                <img src="assets/images/courses/4by3/17.jpg" class="card-img" alt="course image">
-                <!-- Overlay -->
-                <div class="card-img-overlay d-flex align-items-start flex-column p-3">
-                  <!-- Card overlay Top -->
-                  <div class="w-100 mb-auto d-flex justify-content-end">
-                    <!-- Favorite icon -->
-                    <a href="#" class="icon-sm bg-white rounded-2"><i class="fas fa-heart text-danger"></i></a>
-                  </div>
-                  <!-- Card overlay bottom -->
-                  <div class="w-100 mt-auto">
-                    <!-- Category -->
-                    <a href="#" class="badge text-dark bg-white fs-6 rounded-1"><i class="far fa-calendar-alt text-orange me-2"></i>29 September 2021</a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card body -->
-              <div class="card-body px-2">
-                <!-- Title -->
-                <h5 class="card-title"><a href="#">Personality development tour</a></h5>
-                <p class="mb-0 text-truncate-2">Yet remarkably appearance get him his projection. Diverted endeavor bed peculiar</p>
-              </div>
-            </div>
-            <!-- Card item END -->
-
-            <!-- Card item START -->
-            <div class="card bg-transparent">
-              <div class="position-relative">
-                <img src="assets/images/courses/4by3/19.jpg" class="card-img" alt="course image">
-                <!-- Overlay -->
-                <div class="card-img-overlay d-flex align-items-start flex-column p-3">
-                  <!-- Card overlay Top -->
-                  <div class="w-100 mb-auto d-flex justify-content-end">
-                    <!-- Favorite icon -->
-                    <a href="#" class="icon-sm bg-white rounded-2"><i class="far fa-heart text-danger"></i></a>
-                  </div>
-                  <!-- Card overlay bottom -->
-                  <div class="w-100 mt-auto">
-                    <!-- Category -->
-                    <a href="#" class="badge text-success bg-white fs-6 rounded-1"><i class="fas fa-circle text-success me-2"></i>Live</a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card body -->
-              <div class="card-body px-2">
-                <!-- Title -->
-                <h5 class="card-title"><a href="#">Global Education Fall Meeting for Everyone</a></h5>
-                <p class="mb-0 text-truncate-2">Rooms oh fully taken by worse do. Points afraid but may end law lasted </p>
-              </div>
-            </div>
-            <!-- Card item END -->
+            <% } %>
 
           </div>
         </div>
@@ -232,6 +135,7 @@ Event START -->
       </div>
     </div>
   </section>
+  <% } %>
   <!-- Event END -->
 
   <!-- About START -->
@@ -646,7 +550,7 @@ Event START -->
             <!-- Card body -->
             <div class="card-body px-3">
               <!-- Title -->
-              <div class="text-truncate-2" id="show" style="transition: 0.5s all ease;">
+              <div class="text-truncate-2" id="show">
                 <p class="">A Madagascar, la capacité des institutions d’enseignement supérieur est encore insuffisante pour absorber le nombre croissant de bachelier.</p>
 
                 <p>Et selon un rapport de la Banque mondiale en 2014, le système d’enseignement supérieur actuel à Madagascar est l’un des moins développé au monde . Aussi, nous croyons en cette vision qu’ « un jour, tous les jeunes de ce pays auront l’opportunité d’accéder à un meilleur enseignement supérieur ».</p>
@@ -657,8 +561,8 @@ Event START -->
               </div>
               <!-- Info -->
               <div class="d-flex justify-content-between">
-                <button type="button" style="transition: 0.3s all ease;" onclick="voirplus()" class="btn btn-sm btn-primary-soft" id="mot">Voir plus</button>
-                <button style="display: none;transition: 0.3s all ease;" type="button" onclick="fermer()" class="btn btn-sm btn-primary-soft" id="mots">Fermer</button>
+                <button type="button" onclick="voirplus()" class="btn btn-sm btn-primary-soft" id="mot">Voir plus</button>
+                <button style="display: none;" type="button" onclick="fermer()" class="btn btn-sm btn-primary-soft" id="mots">Fermer</button>
               </div>
             </div>
           </div>

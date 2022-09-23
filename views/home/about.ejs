@@ -1,0 +1,148 @@
+<%- include('../_partials/_header.ejs') %>
+<main>
+  <!-- Latest news START -->
+  <section id="mot-du-directeur">
+    <div class="container">
+      <!-- Title -->
+      <div class="row mb-4">
+        <div class="d-md-flex justify-content-md-between align-items-center">
+          <h2 class="mb-2 mb-md-0">ISSD</h2>
+          <!-- <div>
+            <span class="me-2">Want to read more?</span>
+            <a href="#" class="btn btn-sm btn-primary-soft mb-0">Go here<i class="fas fa-angle-right ms-2"></i></a>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <!-- Card item START -->
+          <div class="card bg-transparent" data-aos="fade-right" data-aos-duration="1000">
+            <div class="overflow-hidden rounded-3">
+              <img src="assets/images/event/19.jpg" class="card-img" alt="Card image">
+              <!-- Overlay -->
+              <div class="bg-overlay bg-dark opacity-4"></div>
+              <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                <!-- badge -->
+                <a href="#" class="badge bg-danger text-white">Mots du Directeur</a>
+              </div>
+            </div>
+            <!-- Card body -->
+            <div class="card-body px-3">
+              <!-- Title -->
+              <div class="text-truncate-2" id="show">
+                <p class="">A Madagascar, la capacité des institutions d’enseignement supérieur est encore insuffisante pour absorber le nombre croissant de bachelier.</p>
+
+                <p>Et selon un rapport de la Banque mondiale en 2014, le système d’enseignement supérieur actuel à Madagascar est l’un des moins développé au monde . Aussi, nous croyons en cette vision qu’ « un jour, tous les jeunes de ce pays auront l’opportunité d’accéder à un meilleur enseignement supérieur ».</p>
+
+                <p>En se voulant être à la fois une force et un vecteur pour le changement et le développement, l’ISSD a choisi comme slogan : </p>
+                <p><em>« Oser changer pour développer ».</em></p>
+                <h6>Docteur Heritiana Andriamalala</h6> <span class="small">Directeur de l'ISSD</span>
+              </div>
+              <!-- Info -->
+              <div class="d-flex justify-content-between">
+                <button type="button" onclick="voirplus()" class="btn btn-sm btn-primary-soft" id="mot">Voir plus</button>
+                <button style="display: none;" type="button" onclick="fermer()" class="btn btn-sm btn-primary-soft" id="mots">Fermer</button>
+              </div>
+            </div>
+          </div>
+          <!-- Card item END -->
+        </div>
+
+        <div class="col-md-6 col-lg-8">
+          <div class="row g-4">
+            <div class="col-lg-7">
+              <!-- Card item START -->
+              <div class="card bg-light p-3 mb-4" data-aos="fade-up" data-aos-duration="1000">
+                <div class="card-body">
+                  <!-- Badge -->
+                  <!-- <a href="#" class="badge bg-success text-white mb-2">Research</a> -->
+                  <!-- Title -->
+                  <!-- <h5 class="card-title"><a href="#">How to make a college list</a></h5> -->
+                  <p>L'ISSD apportera ses contributions au développement régional, national et à l'essor de l'économique du pays; à la promotion culturelle de la société; à l'épanouissement tant sur les plans physique intellectuel, que moral. </p>
+                  <!-- Info -->
+                  <!-- <div class="d-flex justify-content-between">
+                    <h6 class="mb-0"><a href="#">Louis Crawford</a></h6>
+                    <span class="small">12H Ago</span>
+                  </div> -->
+                </div>
+              </div>
+              <!-- Card item END -->
+
+              <!-- Card item START -->
+              <div class="card bg-transparent" data-aos="fade-up" data-aos-duration="1000">
+                <div class="overflow-hidden rounded-3">
+                  <img src="assets/images/event/20.jpg" class="card-imgp" alt="Card image">
+                  <!-- Overlay -->
+                  <div class="bg-overlay bg-dark opacity-4"></div>
+                  <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                    <!-- badge -->
+                    <!-- <a href="#" class="badge bg-info text-white">Student story</a> -->
+                  </div>
+                </div>
+                <!-- Card body -->
+                <div class="card-body px-3">
+                  <!-- Title -->
+                  <!-- <h5 class="card-title"><a href="#">Campus Support for First-Year Students</a></h5> -->
+                  <p class="">L'Institut Supérieur des Sciences du Développement (ISSD) a été fondé suite à la volonté et au désir de servir la Nation à travers le partage et la transmission de savoir et des compétences aux jeunes du Pays. </p>
+
+                  <!-- Info -->
+                  <!-- <div class="d-flex justify-content-between">
+                    <h6 class="mb-0"><a href="#">Lori Stevens</a></h6>
+                    <span class="small">3M Ago</span>
+                  </div> -->
+                </div>
+              </div>
+              <!-- Card item END -->
+            </div>
+
+            <div class="col-lg-5" data-aos="fade-left" data-aos-duration="1000">
+              <!-- Card item START -->
+              <div class="card bg-transparent">
+                <div class="overflow-hidden rounded-3">
+                  <img src="assets/images/university/01.jpg" class="card-img-top" alt="course image">
+                  <!-- Overlay -->
+                  <div class="bg-overlay bg-dark opacity-2 rounded-2"></div>
+                  <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                    <!-- badge -->
+                    <a href="#" class="badge bg-purple text-white">Partenaire</a>
+                  </div>
+                </div>
+                <!-- Card body -->
+                <div class="card-body px-3">
+                  <!-- Title -->
+                  <!-- <h5 class="card-title"><a href="#">Covid-19 and the college experienced</a></h5> -->
+                  <p>La politique de développement économique de Madagascar, comme celle de la plupart des pays africains, encourage les projets de développement communautaire et les projets économiques associatifs, particulièrement en milieu rural à travers des secteurs variés. </p>
+                  <!-- Info -->
+                  <!-- <div class="d-flex justify-content-between">
+                    <h6 class="mb-0"><a href="#">Amanda Reed</a></h6>
+                    <span class="small">July 21, 2021</span>
+                  </div> -->
+                </div>
+              </div>
+              <!-- Card item END -->
+            </div>
+          </div><!-- Row END -->
+        </div>
+      </div><!-- Row END -->
+    </div>
+  </section>
+  <!-- Latest news END -->
+</main>
+<%- include('../_partials/_footer.ejs') %>
+
+<script>
+  function voirplus() {
+    var show = document.getElementById('show');
+    show.classList.remove('text-truncate-2');
+    $('#mot').hide();
+    document.getElementById('mots').style.display = 'block'
+  }
+
+  function fermer() {
+    var show = document.getElementById('show');
+    show.classList.add('text-truncate-2');
+    $('#mot').show();
+    document.getElementById('mots').style.display = 'none'
+  }
+</script>

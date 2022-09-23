@@ -1,0 +1,51 @@
+<%- include('../../_partials/_header.ejs') %>
+<%- include('../../_partials/_sidebar.ejs') %>
+<%- include('../../_partials/_navbar.ejs') %>
+<div class="page-content-wrapper border">
+
+  <!-- Title -->
+  <div class="row mb-3">
+    <div class="col-12 d-sm-flex justify-content-between align-items-center">
+      <h1 class="h3 mb-2 mb-sm-0">Actualités</h1>
+    </div>
+    <div class="line"></div>
+  </div>
+
+  <form action="/admin-add-actualite" method="post" enctype="multipart/form-data">
+    <div class="col-12 mb-4">
+      <label class="form-label">Titre de l'actualité</label>
+      <input class="form-control" type="text" name="titre" placeholder="Titre de l'actualité">
+    </div>
+    <div class="col-12 mb-4">
+      <label class="form-label">Date d'éxpiration</label>
+      <input class="form-control" type="date" name="expiration" placeholder="Date d'éxpiration">
+    </div>
+    <div class="col-12 mb-4">
+      <label class="form-label">Image</label>
+      <input class="form-control" name="image" type="file">
+    </div>
+    <div class="col-12 mb-4">
+      <label class="form-label">Déscription</label>
+      <textarea class="form-control" name="description" id="description" cols="30" rows="10"></textarea>
+    </div>
+    <div class="d-flex justify-content-end mt-3">
+      <button type="submit" class="btn btn-primary next-btn mb-0">Enregistrer</button>
+    </div>
+  </form>
+</div>
+
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    selector: '#description',
+    plugins: [
+      'a11ychecker', 'advlist', 'advcode', 'advtable', 'autolink', 'checklist', 'export',
+      'lists', 'link', 'image', 'charmap', 'preview', 'anchor', 'searchreplace', 'visualblocks',
+      'powerpaste', 'fullscreen', 'formatpainter', 'insertdatetime', 'media', 'table', 'help', 'wordcount'
+    ],
+    toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+      'alignleft aligncenter alignright alignjustify | ' +
+      'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+  });
+</script>
+<%- include('../../_partials/_footer.ejs') %>

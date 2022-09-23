@@ -1,9 +1,9 @@
-const con = require('./db');
+const con = require('../config/db');
 const bcrypt = require('bcryptjs');
 
 exports.login = async (req, res) => {
     if (req.session.loggedin) {
-        return res.redirect('/home'); //redirect to home
+        return res.redirect('/admin'); //redirect to home
     } else
         req.session.loggedin = false;
     return res.render('Backend/Admin/Auth/login', { data: { email: "" } });
@@ -15,28 +15,28 @@ exports.loginSubmit = async (req, res) => {
         con.query('SELECT * FROM user WHERE email = ? ', [data.email],
             async function (error, results, fields) {
                 if (error) {
-                    return res.render('Auth/login', { error: error, data });
+                    return res.render('Backend/Admin/Auth/login', { error: error, data });
                 }
                 if (results.length > 0) {
                     if (!await bcrypt.compare(data.password, results[0].password)) {
-                        return res.render('Auth/login', { error: 'Mot de passe incorrect', data });
+                        return res.render('Backend/Admin/Auth/login', { error: 'Mot de passe incorrect', data });
                     }
                     req.session.loggedin = true;
                     const { password, ...user } = await results[0];
                     req.session.user = user;
                     return res.redirect('/admin');
                 } else {
-                    return res.render('Auth/login', { error: 'Incorrect Email', data });
+                    return res.render('Backend/Admin/Auth/login', { error: 'Incorrect Email', data });
                 }
             });
     } else {
-        return res.render('Auth/login', { error: 'Completez le champ email et password' });
+        return res.render('Backend/Admin/Auth/login', { error: 'Completez le champ email et password' });
     }
 }
 
 exports.register = async (req, res) => {
     if (req.session.loggedin && !req.session.lockScreen) {
-        return res.redirect('/home');
+        return res.redirect('/admin');
     } else
         if (req.session.loggedin && req.session.lockScreen) {
             return res.redirect('/auth/lock_screen');
@@ -68,17 +68,17 @@ exports.registerSubmit = async (req, res) => {
                                 req.session.user = user;
                                 return res.redirect('/admin');
                             } else {
-                                return res.render('Auth/register', { error: 'Incorrect Email', data });
+                                return res.render('Backend/Admin/Auth/signup', { error: 'Incorrect Email', data });
                             }
                         });
                 }
             })
     } else {
-        return res.render('Auth/register', { error: 'Mot de passe non identique', data });
+        return res.render('Backend/Admin/Auth/signup', { error: 'Mot de passe non identique', data });
     }
 }
 
 exports.logout = async (req, res) => {
     req.session.destroy();
-    return res.render('Auth/logout');
+    return res.render('Backend/Admin/Auth/login');
 }
