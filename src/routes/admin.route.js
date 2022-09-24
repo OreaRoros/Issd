@@ -21,13 +21,13 @@ var upload = multer({
 const AdminController = require('../controllers/AdminController');
 
 router.get('/admin', requireAuth, AdminController.index);
-router.get('/admin-actualite', AdminController.actualite);
-router.get('/admin-add-actualite', AdminController.viewaddactu);
-router.post('/admin-search-actu', AdminController.search);
-router.post('/admin-add-actualite', upload.single('image'), AdminController.addactualite);
-router.get('/admin-edit-actualite/:id', AdminController.vieweditactualite);
-router.post('/admin-edit-actualite/:id', upload.single('image'), AdminController.editactualite);
-router.post('/admin-delete-actu/:id', AdminController.deleteactu);
+router.get('/admin-actualite', requireAuth, AdminController.actualite);
+router.get('/admin-add-actualite', requireAuth, AdminController.viewaddactu);
+router.post('/admin-search-actu', requireAuth, AdminController.search);
+router.post('/admin-add-actualite', requireAuth, upload.single('image'), AdminController.addactualite);
+router.get('/admin-edit-actualite/:id', requireAuth, AdminController.vieweditactualite);
+router.post('/admin-edit-actualite/:id', requireAuth, upload.single('image'), AdminController.editactualite);
+router.post('/admin-delete-actu/:id', requireAuth, AdminController.deleteactu);
 
 
 module.exports = router;
