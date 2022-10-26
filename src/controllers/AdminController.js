@@ -56,11 +56,20 @@ exports.addactualite = async (req, res) => {
         req.flash('error', "Vous n'avez pas rempli les formulaires");
         res.redirect('/admin-add-actualite');
     } else {
-        var content = [req.body.titre, req.body.expiration, req.file.filename, req.body.description];
-        Actualite.create(content, function () {
-            req.flash('success', 'Ajouter avec succès');
-            res.redirect('/admin-actualite');
-        });
+        var content = [];
+        if (!req.file) {
+            content = [req.body.titre, req.body.expiration, req.body.description];
+            Actualite.creates(content, function () {
+                req.flash('success', 'Ajouter avec succès');
+                res.redirect('/admin-actualite');
+            });
+        } else {
+            content = [req.body.titre, req.body.expiration, req.file.filename, req.body.description];
+            Actualite.create(content, function () {
+                req.flash('success', 'Ajouter avec succès');
+                res.redirect('/admin-actualite');
+            });
+        }
     }
 }
 
@@ -75,11 +84,20 @@ exports.editactualite = async (req, res) => {
         req.flash('error', "Vous n'avez pas rempli les formulaires");
         res.redirect('/admin-edit-actualite');
     } else {
-        var content = [req.body.titre, req.body.expiration, req.file.filename, req.body.description];
-        Actualite.update(content, req.params.id, function () {
-            req.flash('success', 'Modifier avec succès');
-            res.redirect('/admin-actualite');
-        });
+        var content = [];
+        if (!req.file) {
+            content = [req.body.titre, req.body.expiration, req.body.description];
+            Actualite.updates(content, req.params.id, function () {
+                req.flash('success', 'Modifier avec succès');
+                res.redirect('/admin-actualite');
+            });
+        } else {
+            content = [req.body.titre, req.body.expiration, req.file.filename, req.body.description];
+            Actualite.update(content, req.params.id, function () {
+                req.flash('success', 'Modifier avec succès');
+                res.redirect('/admin-actualite');
+            });
+        }
     }
 }
 
@@ -98,7 +116,6 @@ exports.deleteactu = async (req, res) => {
 
 exports.search = (req, res) => {
     var search = req.body.titre;
-    console.log(search);
     let sql = "SELECT * FROM actualite WHERE titre LIKE '%" + search + "%'";
     connection.query(sql, (err, result) => {
         if (err) throw err;

@@ -152,7 +152,7 @@
 <script src="https://cdn.jsdelivr.net/npm/moment-locale-fr@1.0.0/fr.min.js"></script>
 <script>
   function search() {
-    $('.search').bind('input', function() {
+    $('.search').keypress('input', function() {
       var resultat = $(this).val();
       $.ajax({
         url: '/admin-search-actu',
@@ -161,6 +161,7 @@
           titre: resultat,
         },
         success: function(res) {
+          console.log(res);
           var HTML = '';
           for (actualite of res) {
             var text = '<tr><td><div class="d-flex align-items-center position-relative"><div class="w-60px"><img src="/assets/upload/' + actualite.image + '" class="rounded" alt=""></div><h6 class="table-responsive-title mb-0 ms-2"> <a href="/admin-edit-actualite/" class="stretched-link">' + actualite.titre + '</a></h6></div></td><td><span class="badge bg-success bg-opacity-15 text-success">' + moment(actualite.expiration).fromNow() + '</span></td><td><a href="/admin-edit-actualite/' + actualite.id + '" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0">Editer</a><form action="/admin-delete-actu/' + actualite.id + '" method="post" style="display: inline;"><button class="btn btn-sm btn-danger-soft mb-0">Supprimer</button></form></td></tr>';

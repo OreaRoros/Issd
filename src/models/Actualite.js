@@ -33,8 +33,22 @@ class Actualite {
         })
     }
 
+    static creates(content, cb) {
+        connection.query('INSERT INTO actualite SET titre = ?, expiration = ?, description = ?', content, (err, result) => {
+            if (err) throw err
+            cb(result)
+        })
+    }
+
     static update(content, id, cb) {
         connection.query('UPDATE actualite SET titre = ?, expiration = ?, image = ?, description = ? WHERE id = ' + id, content, (err, result) => {
+            if (err) throw err
+            cb(result)
+        })
+    }
+
+    static updates(content, id, cb) {
+        connection.query('UPDATE actualite SET titre = ?, expiration = ?, description = ? WHERE id = ' + id, content, (err, result) => {
             if (err) throw err
             cb(result)
         })
